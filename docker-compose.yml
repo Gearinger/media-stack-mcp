@@ -1,0 +1,37 @@
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: media-stack-prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+    volumes:
+      - prowlarr-config:/config
+    ports:
+      - "9696:9696"
+    restart: unless-stopped
+
+  app:
+    build: .
+    image: media-stack-mcp:latest
+    container_name: media-stack-app
+    depends_on:
+      - prowlarr
+    environment:
+      - PROWLARR_URL=http://prowlarr:9696
+      - PROWLARR_CONFIG_XML=/prowlarr-config/config.xml
+      - DOWNLOAD_DIR=/downloads
+      - TZ=Asia/Shanghai
+      - PORT=8787
+    volumes:
+      - prowlarr-config:/prowlarr-config:ro
+      - ./downloads:/downloads
+      - app-config:/config
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
+
+volumes:
+  prowlarr-config:
+  app-config:

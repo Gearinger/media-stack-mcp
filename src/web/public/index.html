@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>media-stack</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="logo">▚</span>
+        <div>
+          <h1>media-stack</h1>
+          <p class="sub">Prowlarr 搜索 + aria2 下载</p>
+        </div>
+      </div>
+      <div class="health" id="health">
+        <span class="dot" id="dot-prowlarr"></span><span id="txt-prowlarr">Prowlarr</span>
+        <span class="dot" id="dot-aria2"></span><span id="txt-aria2">aria2</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <form id="search-form">
+          <input id="query" type="search" placeholder="搜点什么，比如 big buck bunny 1080p" autocomplete="off" />
+          <select id="limit">
+            <option value="10">10 条</option>
+            <option value="20">20 条</option>
+            <option value="30">30 条</option>
+          </select>
+          <button type="submit" id="search-btn">搜索</button>
+        </form>
+        <p class="hint" id="search-hint">输入关键词回车。索引器较慢时可能要等十几秒到一分钟。</p>
+        <div id="results"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>下载</h2>
+          <div class="actions">
+            <button class="ghost" id="refresh">刷新</button>
+            <button class="ghost" id="purge-done">清理已完成</button>
+          </div>
+        </div>
+        <div id="downloads"><p class="hint">还没有任务。</p></div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

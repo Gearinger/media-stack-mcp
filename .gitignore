@@ -1,0 +1,6 @@
+node_modules/
+config.json
+*.log
+downloads/
+.DS_Store
+.env

@@ -1,0 +1,36 @@
+{
+  "name": "media-stack-mcp",
+  "version": "0.1.0",
+  "description": "Self-hosted search-and-download stack: Prowlarr + aria2 behind an MCP server and a web UI",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "media-stack-mcp": "src/mcp.mjs",
+    "media-stack-web": "src/web/server.mjs"
+  },
+  "scripts": {
+    "mcp": "node src/mcp.mjs",
+    "web": "node src/web/server.mjs",
+    "start": "node src/web/server.mjs",
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "docker",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mcp",
+    "prowlarr",
+    "aria2",
+    "torrent",
+    "self-hosted",
+    "codex"
+  ]
+}

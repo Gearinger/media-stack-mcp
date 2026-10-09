@@ -1,0 +1,20 @@
+{
+  "prowlarr": {
+    "url": "http://127.0.0.1:9696",
+    "api_key": "YOUR_PROWLARR_API_KEY",
+    "config_xml": "/path/to/Prowlarr/config.xml"
+  },
+  "aria2": {
+    "rpc_url": "http://127.0.0.1:6800/jsonrpc",
+    "secret": "",
+    "download_dir": "~/Downloads",
+    "note": "Point rpc_url at http://127.0.0.1:16800/jsonrpc to reuse an external aria2 front-end such as Motrix."
+  },
+  "web": {
+    "host": "127.0.0.1",
+    "port": 8787
+  },
+  "search": {
+    "default_limit": 10
+  }
+}
