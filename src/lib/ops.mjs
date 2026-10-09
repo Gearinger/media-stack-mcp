@@ -42,7 +42,10 @@ export class Stack {
 
   async download({ pick, url, dir } = {}) {
     const options = {};
-    if (dir) options.dir = dir;
+    // Per-call dir wins, otherwise the configured download_dir overrides whatever the
+    // aria2 front-end (e.g. Motrix) has in its own settings.
+    const targetDir = dir || this.cfg.aria2.downloadDir;
+    if (targetDir) options.dir = targetDir;
     let gid;
     let title;
     if (pick !== undefined && pick !== null) {
@@ -62,7 +65,7 @@ export class Stack {
     } else {
       throw new Error("需要提供 pick 编号或 url");
     }
-    return { gid, title, dir: dir || this.cfg.aria2.downloadDir || null };
+    return { gid, title, dir: targetDir || null };
   }
 
   async downloads(status = "all", limit = 20) {

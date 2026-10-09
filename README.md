@@ -58,7 +58,18 @@ node src/web/server.mjs                # 网页界面 http://127.0.0.1:8787
 
 如果你想用已经在用的 Motrix 而不是新起 aria2，只要把 `config.json` 里的
 `aria2.rpc_url` 指向 Motrix 的 RPC 即可（Motrix 默认 `http://127.0.0.1:16800/jsonrpc`，
-密钥通常是空的），下载会实时出现在 Motrix 界面上。
+密钥通常是空的），下载会实时出现在 Motrix 界面上。`aria2.download_dir` 的优先级高于
+Motrix 自己的设置：填了它，任务就会被投递到那个目录，适合把大文件放到别的卷上。
+
+想开机自启（网页界面 + Prowlarr 都交给 launchd 管）：
+
+```bash
+bash scripts/install-services-macos.sh          # 网页界面 + Prowlarr
+bash scripts/install-services-macos.sh --web-only
+```
+
+服务日志在 `~/Library/Logs/media-stack/`。注意项目目录要放在本地磁盘：launchd 无法把
+工作目录或日志写到外置 exFAT 卷上（会以 `EX_CONFIG` 退出），下载目录则不受这个限制。
 
 > macOS 注意：Prowlarr 官方 app 没有代码签名，Homebrew 的 cask 因此在 2026-09 被禁用。
 > `install-macos.sh` 会下载官方 release 包并做一次本地 ad-hoc 签名，否则 macOS 不允许它启动。

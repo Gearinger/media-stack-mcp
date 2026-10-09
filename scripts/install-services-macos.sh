@@ -33,7 +33,7 @@ write_agent() {
   } > "$plist"
   # launchd refuses world/group-writable plists with a bare "Input/output error".
   chmod 644 "$plist"
-  launchctl unload "$plist" 2>/dev/null || true
+  launchctl bootout "gui/$(id -u)/$label" 2>/dev/null || true
   launchctl bootstrap "gui/$(id -u)" "$plist" 2>/dev/null || launchctl load -w "$plist"
   echo "已加载 $label"
 }
